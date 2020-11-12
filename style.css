@@ -1,0 +1,243 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body{
+    background: url('public/notes-bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.headings{
+    text-align: center;
+}
+
+#title{
+    background-color: #007FFF;
+    padding: 10px;
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.your-notes{
+    /* background-color: #007FFF; */
+    /* border: 2px solid #000000; */
+    /* width: 450px;
+    max-height: 400px; */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+#no-notes-found{
+    background-color: #007fff;
+    padding: 20px;
+    color: #ff8000;
+}
+
+.note-window{
+    text-align: left;
+    background-color: #007FFF;
+    color: #ff8000;
+    width: fit-content;
+    padding: 15px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+}
+
+.note-window > input, .note-window > textarea, .note-window > button{
+    border-radius: 5px;
+    border: 2px solid #ff8000;
+}
+
+.text-styles{
+    padding-top: 20px;
+    text-align: center;
+}
+
+.text-styles > button{
+    background-color: #ff8000;
+    padding-top: 8px;
+}
+
+.text-styles > .font-size{
+    padding-top: 8px;
+}
+
+.text-styles > button, .text-styles > input{
+    cursor: pointer;
+    width: 40px;
+    border: 2px solid #ff8000;
+}
+
+.fas{
+    pointer-events: none;
+}
+
+.note-required-field, .title-required-field{
+    color: #ff0000;
+}
+
+.required-star{
+    color: #ff0000;
+}
+
+#create-button{
+    color: #ffffff;
+    background-color: #ff8000;
+    border: 2px solid #ff8000;
+    border-radius: 5px;
+    width: 130px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#create-button:hover{
+    color: #ff8000;
+    background-color: #ffffff;
+}
+
+.cancel-button{
+    color: #d73a49;
+    border: 2px solid #d73a49;
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.cancel-button:hover{
+    color: #ffffff;
+    background-color: #d73a49;
+}
+
+#submit-button{
+    color: #28a745;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#submit-button:hover{
+    color: #ffffff;
+    background-color: #28a745;
+}
+
+#edit-button{
+    color: #f0b903;
+    background-color: #ffffff;
+    border: 2px solid #f0b903;
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#edit-button:hover{
+    color: #ffffff;
+    background-color: #f0b903;
+}
+
+#view-button{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background-color: #f0b903;
+    border: 2px solid #f0b903;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#view-button:hover{
+    color: #f0b903;
+    background-color: #ffffff;
+}
+
+#delete-button{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background-color: #d73a49;
+    border: 2px solid #d73a49;
+    border-radius: 5px;
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#delete-button:hover{
+    color: #d73a49;
+    background-color: #ffffff;
+}
+
+.font-size{
+    width: 40px;
+}
+
+.note-composer, .note-editor{
+    display: none;
+    margin: auto;
+    text-align: center;
+}
+
+#note-composer-heading, #note-editor-heading{
+    padding-top: 0;
+    text-align: center;
+    background-color: #ff8000;
+    color: #ffffff;
+}
+
+#note-input-editor, #note-input-composer{
+    resize: none;
+    width: 300px;
+    height: 200px;
+}
+
+#title-required-field, #note-required-field{
+    display: none;
+}
+
+#note-title-editor{
+    background-color: #6d6c6c;
+    border: 2px solid #cccccc;
+}
+
+#previous-notes{
+    display: none;
+    width: 350px;
+}
+
+.previous-note{
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+}
+
+#edit-button:hover, #delete-button:hover{
+    cursor: pointer;
+}
+
+.previous-note > h3, .previous-note > div{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
