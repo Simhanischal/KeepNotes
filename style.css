@@ -52,6 +52,7 @@ body{
     width: fit-content;
     padding: 15px;
     border: 2px solid #ffffff;
+    border-top: none;
     border-radius: 5px;
 }
 
@@ -201,10 +202,12 @@ body{
 }
 
 #note-composer-heading, #note-editor-heading{
-    padding-top: 0;
+    margin-bottom: 0;
     text-align: center;
     background-color: #ff8000;
     color: #ffffff;
+    border: 2px solid #ffffff;
+    border-bottom: none;
 }
 
 #note-input-editor, #note-input-composer{
