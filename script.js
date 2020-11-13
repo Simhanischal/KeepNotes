@@ -44,6 +44,7 @@ function init(){
     if(notes !== null && notes.length !== 0){
         previousNotes.style.display = 'block';
         document.querySelector('#no-notes-found').style.display = 'none';
+        document.querySelector('#noting-empty').style.display = 'none';
         notes.map((note)=>{
             let noteBody = document.createElement('div');
             let title = document.createElement('h3');
