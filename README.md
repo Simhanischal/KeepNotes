@@ -1,9 +1,9 @@
 # KeepNotes
 A Notes keeping application with CRUD operations made using vanilla JS. Features in the app right now include:
 
-###### Creating a note
-###### Viewing/Editing an existing note
-###### Deleting an existing note
+###### 1. Creating a note
+###### 2. Viewing/Editing an existing note
+###### 3. Deleting an existing note
 
 
 ## Technologies Used
