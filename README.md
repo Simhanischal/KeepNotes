@@ -9,7 +9,7 @@ A Notes keeping application with CRUD operations made using vanilla JS. Features
 ## Technologies Used
 HTML, CSS and Javascript.
 
-##### Note: Window.localStorage is used for storing notes which kinda is used as a pseudo database!
+##### Note: Window.localStorage is used for storing notes which kinda acts like a pseudo database!
 
 ## Contribution
 ##### 1. Fork the repository.
