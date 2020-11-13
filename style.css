@@ -2,6 +2,7 @@ html,body{
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
 }
 
 body{
@@ -29,13 +30,10 @@ body{
 }
 
 .your-notes{
-    /* background-color: #007FFF; */
-    /* border: 2px solid #000000; */
-    /* width: 450px;
-    max-height: 400px; */
     text-align: center;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     margin: auto;
 }
 
@@ -43,6 +41,8 @@ body{
     background-color: #007fff;
     padding: 20px;
     color: #ff8000;
+    border: 2px solid #ff8000;
+    border-radius: 10px;
 }
 
 .note-window{
