@@ -5,73 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keep Notes</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="public/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png">
+    <link rel="manifest" href="public/site.webmanifest">
     <script src="https://kit.fontawesome.com/452e65c997.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="main">
-    <div class="headings">
-        <h2 id="title">Keep Notes <i class="far fa-sticky-note"></i></h2>
-        <button id="create-button">Create Note</button>
-        <h2 id="your-notes-heading">Your Notes</h2>
-    </div>
-    <div class="your-notes">
-        <h3 id="no-notes-found">No notes found. Click on "Create Note" button above to get started!</h3>
-        <div id="previous-notes">
-
+        <div class="headings">
+            <h2 id="title">Keep Notes <i class="far fa-sticky-note"></i></h2>
+            <button id="create-button">Create Note</button>
+            <h2 id="your-notes-heading">Your Notes</h2>
         </div>
-    </div>
+        <div class="your-notes">
+            <h3 id="no-notes-found">No notes found. Click on "Create Note" button above to get started!</h3>
+            <div id="previous-notes">
 
-    <div class="note-composer">
-        <h3 id="note-composer-heading">Note composer</h3>
-        <div class="note-window">
-            <label for="title">Title </label>
-            <input type="text" id="note-title-composer">
-            <h4 class="title-required-field">Title is a required field</h4>
-            <div class="text-styles">
-                <label for="bg-color"><i class="fas fa-fill-drip"></i></label>
-                <input type="color" class="bg-color composer">
-                <button class="bold-button composer"><i class="fas fa-bold"></i></button>
-                <button class="italic-button composer"><i class="fas fa-italic"></i></button>
-                <input type="number" class="font-size composer" value = "15" max="50">
-                <label for="font-color"><i class="fas fa-font"></i></label>
-                <input type="color" class="font-color composer">
+            </div>
+        </div>
+
+        <div class="note-composer">
+            <h3 id="note-composer-heading">Note composer</h3>
+            <div class="note-window">
+                <label for="title">Title </label>
+                <input type="text" id="note-title-composer">
+                <h4 class="title-required-field">Title is a required field</h4>
+                <div class="text-styles">
+                    <label for="bg-color"><i class="fas fa-fill-drip"></i></label>
+                    <input type="color" class="bg-color composer">
+                    <button class="bold-button composer"><i class="fas fa-bold"></i></button>
+                    <button class="italic-button composer"><i class="fas fa-italic"></i></button>
+                    <input type="number" class="font-size composer" value = "15" max="50">
+                    <label for="font-color"><i class="fas fa-font"></i></label>
+                    <input type="color" class="font-color composer">
+                </div>
+                <br>
+                <!-- <label for="note">Note <span class="required-star">*</span></label> -->
+                <textarea id="note-input-composer" cols="40" rows="10" placeholder="Pen down your thoughts here!!"></textarea>
+                <h4 class="note-required-field">Note is a required field</h4>
             </div>
             <br>
-            <!-- <label for="note">Note <span class="required-star">*</span></label> -->
-            <textarea id="note-input-composer" cols="40" rows="10" placeholder="Pen down your thoughts here!!"></textarea>
-            <h4 class="note-required-field">Note is a required field</h4>
+            <button id="submit-button">Submit</button>
+            <button class="cancel-button">Cancel</button>
         </div>
-        <br>
-        <button id="submit-button">Submit</button>
-        <button class="cancel-button">Cancel</button>
-    </div>
 
-    <div class="note-editor">
-        <h3 id="note-editor-heading">Note Editor</h3>
-        <div class="note-window">
-            <label for="title">Title </label>
-            <input type="text" readonly id="note-title-editor">
-            <h4 class="title-required-field">Title is a required field</h4>
-            <div class="text-styles">
-                <label for="bg-color"><i class="fas fa-fill-drip"></i></label>
-                <input type="color" class="bg-color editor">
-                <button class="bold-button editor"><i class="fas fa-bold"></i></button>
-                <button class="italic-button editor"><i class="fas fa-italic"></i></button>
-                <input type="number" class="font-size editor">
-                <label for="font-color"><i class="fas fa-font"></i></label>
-                <input type="color" class="font-color editor">
+        <div class="note-editor">
+            <h3 id="note-editor-heading">Note Editor</h3>
+            <div class="note-window">
+                <label for="title">Title </label>
+                <input type="text" readonly id="note-title-editor">
+                <h4 class="title-required-field">Title is a required field</h4>
+                <div class="text-styles">
+                    <label for="bg-color"><i class="fas fa-fill-drip"></i></label>
+                    <input type="color" class="bg-color editor">
+                    <button class="bold-button editor"><i class="fas fa-bold"></i></button>
+                    <button class="italic-button editor"><i class="fas fa-italic"></i></button>
+                    <input type="number" class="font-size editor">
+                    <label for="font-color"><i class="fas fa-font"></i></label>
+                    <input type="color" class="font-color editor">
+                </div>
+                <br>
+                <!-- <label for="note">Note <span class="required-star">*</span></label> -->
+                <textarea id="note-input-editor" cols="40" rows="10"></textarea>
+                <h4 class="note-required-field">Note is a required field</h4>
             </div>
             <br>
-            <!-- <label for="note">Note <span class="required-star">*</span></label> -->
-            <textarea id="note-input-editor" cols="40" rows="10"></textarea>
-            <h4 class="note-required-field">Note is a required field</h4>
-        </div>
-        <br>
-        <button id="edit-button">Edit</button>
-        <button class="cancel-button">Cancel</button>
+            <button id="edit-button">Edit</button>
+            <button class="cancel-button">Cancel</button>
+        </div>        
     </div>
-            
-</div>
     <script src="script.js"></script>
 </body>
 </html>
