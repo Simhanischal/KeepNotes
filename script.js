@@ -237,6 +237,6 @@ function cancelNote(){
     noteEditor.style.display = 'none';
     yourNotes.style.display = 'block';
     createNoteButton.style.display = 'block';
-    location.reload();
+    location.reload(); 
 }
 
