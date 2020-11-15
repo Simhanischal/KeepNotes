@@ -37,10 +37,14 @@ fontSize[0].addEventListener('change',changeFontSize);
 fontSize[1].addEventListener('change',changeFontSize);
 fontColor[0].addEventListener('change',changeFontColor);
 fontColor[1].addEventListener('change',changeFontColor);
+noteInputComposer.addEventListener('input',validateInput);
+noteInputEditor.addEventListener('input',validateInput);
+noteTitleComposer.addEventListener('input',validateTitle);
 
 //change input to notebody
 function init(){
     let notes = JSON.parse(localStorage.getItem('notes'));
+    notes.reverse();
     if(notes !== null && notes.length !== 0){
         previousNotes.style.display = 'block';
         document.querySelector('#no-notes-found').style.display = 'none';
@@ -159,13 +163,41 @@ function viewPreviousNote(event){
     }
 }
 
+function validateTitle(event){
+    if(event.target.value !== ''){
+        titleRequiredField[0].style.display = 'none';
+
+    }
+    else{
+        titleRequiredField[0].style.display = 'block';
+    }
+}
+
+function validateInput(event){
+    if(event.target.value !== ''){
+        if(event.target.id === 'note-input-composer'){
+            noteRequiredField[0].style.display = 'none';
+        }
+        else{
+            noteRequiredField[1].style.display = 'none';
+        }
+    }
+    else{
+        if(event.target.id === 'note-input-composer'){
+            noteRequiredField[0].style.display = 'block';
+        }
+        else{
+            noteRequiredField[1].style.display = 'block';
+        }
+    }
+}
+
 function validateNewNote(note){
     if(note.noteTitle === noteTitleComposer.value){
         isNoteValid = false;
         alert('You already have a note with the same title. Please change yor title and save again!');
     }
 }
-
 
 function submitNote(){
     isNoteValid = true;
