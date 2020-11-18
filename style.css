@@ -210,7 +210,8 @@ body{
     border-bottom: none;
 }
 
-#note-input-editor, #note-input-composer{
+/* To avoid the resize of note editor and note composer on increasing font size*/
+#note-body-editor, #note-body-composer{
     resize: none;
     width: 300px;
     height: 200px;
@@ -252,6 +253,7 @@ body{
     cursor: pointer;
 }
 
+/* Hide the overflow text in note with an ellipsis*/
 .previous-note > h3, .previous-note > div{
     white-space: nowrap;
     overflow: hidden;
