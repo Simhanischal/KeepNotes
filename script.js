@@ -13,9 +13,9 @@ const italicButton = document.querySelectorAll('.italic-button');
 const fontSize = document.querySelectorAll('.font-size');
 const fontColor = document.querySelectorAll('.font-color');
 const noteTitleComposer = document.querySelector('#note-title-composer');
-const noteInputComposer = document.querySelector('#note-input-composer');
+const noteBodyComposer = document.querySelector('#note-body-composer');
 const noteTitleEditor = document.querySelector('#note-title-editor');
-const noteInputEditor = document.querySelector('#note-input-editor');
+const noteBodyEditor = document.querySelector('#note-body-editor');
 const titleRequiredField = document.querySelectorAll('.title-required-field');
 const noteRequiredField = document.querySelectorAll('.note-required-field');
 const previousNotes = document.querySelector('#previous-notes');
@@ -41,11 +41,10 @@ fontSize[0].addEventListener('change',changeFontSize);
 fontSize[1].addEventListener('change',changeFontSize);
 fontColor[0].addEventListener('change',changeFontColor);
 fontColor[1].addEventListener('change',changeFontColor);
-noteInputComposer.addEventListener('input',validateInput);
-noteInputEditor.addEventListener('input',validateInput);
+noteBodyComposer.addEventListener('input',validateInput);
+noteBodyEditor.addEventListener('input',validateInput);
 noteTitleComposer.addEventListener('input',validateTitle);
 
-//change input to notebody
 /**
  * init takes no arguments.
  * There is no return value in all cases.
@@ -54,39 +53,39 @@ noteTitleComposer.addEventListener('input',validateTitle);
  */
 function init(){
     let notes = JSON.parse(localStorage.getItem('notes'));
-    notes.reverse();
+    notes.reverse(); //to display recent notes at the top
     if(notes !== null && notes.length !== 0){
         previousNotes.style.display = 'block';
         document.querySelector('#no-notes-found').style.display = 'none';
         document.querySelector('#noting-empty').style.display = 'none';
+        //displaying all the saved notes on the home page
         notes.map((note)=>{
-            let noteBody = document.createElement('div');
+            let body = document.createElement('div');
             let title = document.createElement('h3');
-            // title.innerHTML = note.noteTitle;
             title.appendChild(document.createTextNode(note.noteTitle));
             title.classList.add('previous-note-title');
-            noteBody.appendChild(title);
+            body.appendChild(title);
             let input = document.createElement('div');
             input.classList.add('previous-note-body');
-            input.appendChild(document.createTextNode(note.noteInput));
-            noteBody.appendChild(input);
-            noteBody.appendChild(document.createElement('br'));
+            input.appendChild(document.createTextNode(note.noteBody));
+            body.appendChild(input);
+            body.appendChild(document.createElement('br'));
             let viewButton = document.createElement('button');
             viewButton.appendChild(document.createTextNode('View'));
             viewButton.setAttribute('id','view-button');
-            noteBody.appendChild(viewButton);
+            body.appendChild(viewButton);
             let deleteButton = document.createElement('button');
             deleteButton.appendChild(document.createTextNode('Delete'));
             deleteButton.setAttribute('id','delete-button');
-            noteBody.appendChild(deleteButton);
-            // noteBody.appendChild(document.createElement('br'));
-            noteBody.style.backgroundColor = note.bgColor;
-            noteBody.style.color = note.color;
-            noteBody.classList.add('previous-note');
-            noteBody.classList.add(`${note.noteTitle}`);
-            noteBody.setAttribute('id',`${note.noteTitle}`);
+            body.appendChild(deleteButton);
+            // body.appendChild(document.createElement('br'));
+            body.style.backgroundColor = note.bgColor;
+            body.style.color = note.color;
+            body.classList.add('previous-note');
+            body.classList.add(`${note.noteTitle}`);
+            body.setAttribute('id',`${note.noteTitle}`);
             previousNotes.appendChild(document.createElement('br'));
-            previousNotes.appendChild(noteBody);
+            previousNotes.appendChild(body);
             previousNotes.appendChild(document.createElement('br'));
             viewButton.addEventListener('click',viewPreviousNote);
             deleteButton.addEventListener('click',deletePreviousNote);
@@ -102,14 +101,14 @@ function init(){
  */
 function createNote(){
     noteTitleComposer.value = '';
-    noteInputComposer.value = '';
+    noteBodyComposer.value = '';
     yourNotesHeading.style.display = 'none';
     titleRequiredField[0].style.display = 'none';
     noteRequiredField[0].style.display = 'none';
     yourNotes.style.display = 'none';
     noteComposer.style.display = 'block';
     createNoteButton.style.display = 'none';
-    noteInputComposer.style.fontSize = '15px';
+    noteBodyComposer.style.fontSize = '15px';
 }
 
 /**
@@ -135,7 +134,7 @@ function editNote(){
  * This function changes the background color of the note body in note composer/note editor.
  */
 function changeBgColor(event){
-    event.target.classList.contains('composer') === true ? noteInputComposer.style.backgroundColor = bgColor[0].value : noteInputEditor.style.backgroundColor = bgColor[1].value;
+    event.target.classList.contains('composer') === true ? noteBodyComposer.style.backgroundColor = bgColor[0].value : noteBodyEditor.style.backgroundColor = bgColor[1].value;
 }
 
 /**
@@ -146,13 +145,19 @@ function changeBgColor(event){
  * This function toggles the boldness of the note body in note composer/note editor.
  */
 function toggleNoteBold(event){
+    //for composer
     if(event.target.classList.contains('composer')){
-        noteInputComposer.style.fontWeight === 'bold' ? noteInputComposer.style.fontWeight = 'normal' : noteInputComposer.style.fontWeight = 'bold';
-        noteInputComposer.style.fontWeight === 'bold' ? boldButton[0].style.backgroundColor = 'green' : boldButton[0].style.backgroundColor = '#ff8000';
+        //make the text in the note body bold
+        noteBodyComposer.style.fontWeight === 'bold' ? noteBodyComposer.style.fontWeight = 'normal' : noteBodyComposer.style.fontWeight = 'bold';
+        //highlight the bold button to indicate boldness has been applied 
+        noteBodyComposer.style.fontWeight === 'bold' ? boldButton[0].style.backgroundColor = 'green' : boldButton[0].style.backgroundColor = '#ff8000';
     }
+    //for editor
     else{
-        noteInputEditor.style.fontWeight === 'bold' ? noteInputEditor.style.fontWeight = 'normal' : noteInputEditor.style.fontWeight = 'bold';
-        noteInputEditor.style.fontWeight === 'bold' ? boldButton[1].style.backgroundColor = 'green' : boldButton[1].style.backgroundColor = '#ff8000';
+        //make the text in the note body bold
+        noteBodyEditor.style.fontWeight === 'bold' ? noteBodyEditor.style.fontWeight = 'normal' : noteBodyEditor.style.fontWeight = 'bold';
+        //highlight the bold button to indicate boldness has been applied 
+        noteBodyEditor.style.fontWeight === 'bold' ? boldButton[1].style.backgroundColor = 'green' : boldButton[1].style.backgroundColor = '#ff8000';
     }
 }
 
@@ -164,13 +169,19 @@ function toggleNoteBold(event){
  * This function toggles the italic style of the note body in note composer/note editor.
  */
 function toggleNoteItalic(event){
+    //for composer 
     if(event.target.classList.contains('composer')){
-        noteInputComposer.style.fontStyle === 'italic' ? noteInputComposer.style.fontStyle ='normal' : noteInputComposer.style.fontStyle = 'italic';
-        noteInputComposer.style.fontStyle === 'italic' ? italicButton[0].style.backgroundColor = 'green' : italicButton[0].style.backgroundColor = '#ff8000';
+        //make the text in the note body italic
+        noteBodyComposer.style.fontStyle === 'italic' ? noteBodyComposer.style.fontStyle ='normal' : noteBodyComposer.style.fontStyle = 'italic';
+        //highlight the italic button to indicate italic style has been applied 
+        noteBodyComposer.style.fontStyle === 'italic' ? italicButton[0].style.backgroundColor = 'green' : italicButton[0].style.backgroundColor = '#ff8000';
     }
+    //for editor
     else{
-        noteInputEditor.style.fontStyle === 'italic' ? noteInputEditor.style.fontStyle ='normal' : noteInputEditor.style.fontStyle = 'italic';
-        noteInputEditor.style.fontStyle === 'italic' ? italicButton[1].style.backgroundColor = 'green' : italicButton[1].style.backgroundColor = '#ff8000';
+        //make the text in the note body italic
+        noteBodyEditor.style.fontStyle === 'italic' ? noteBodyEditor.style.fontStyle ='normal' : noteBodyEditor.style.fontStyle = 'italic';
+        //highlight the italic button to indicate italic style has been applied 
+        noteBodyEditor.style.fontStyle === 'italic' ? italicButton[1].style.backgroundColor = 'green' : italicButton[1].style.backgroundColor = '#ff8000';
     }
 }
 
@@ -182,7 +193,7 @@ function toggleNoteItalic(event){
  * This function changes the font size of the note body in note composer/note editor.
  */
 function changeFontSize(event){
-    event.target.classList.contains('composer') === true ? noteInputComposer.style.fontSize = `${fontSize[0].value}px` : noteInputEditor.style.fontSize = `${fontSize[1].value}px`;
+    event.target.classList.contains('composer') === true ? noteBodyComposer.style.fontSize = `${fontSize[0].value}px` : noteBodyEditor.style.fontSize = `${fontSize[1].value}px`;
 }
 
 /**
@@ -193,7 +204,7 @@ function changeFontSize(event){
  * This function changes the font color of the note body in note composer/note editor.
  */
 function changeFontColor(event){
-    event.target.classList.contains('composer') === true ? noteInputComposer.style.color = fontColor[0].value : noteInputEditor.style.color = fontColor[1].value;
+    event.target.classList.contains('composer') === true ? noteBodyComposer.style.color = fontColor[0].value : noteBodyEditor.style.color = fontColor[1].value;
 }
 
 /**
@@ -204,24 +215,25 @@ function changeFontColor(event){
  * This function opens a note editor window where user can edit a note.
  */
 function viewPreviousNote(event){
-    // console.log(event);
-    let [previousNoteTitle, previousNoteInput] = event.target.parentNode.children;
-    // console.log(previousNoteTitle);
+    //get the title and body of note taht has been selected to view using the Javascript event
+    let [previousNoteTitle, previousNoteBody] = event.target.parentNode.children;
+    //call the editNote function to get the note editor window ready
     editNote();
+    //fill the note editor window with title,body and styles of the note selected
     noteTitleEditor.value = previousNoteTitle.innerHTML;
-    noteInputEditor.value = previousNoteInput.innerHTML;
+    noteBodyEditor.value = previousNoteBody.innerHTML;
     let notes = JSON.parse(localStorage.getItem('notes'));
     if(notes !== null){
         notes.map((note)=>{
             if(note.noteTitle === previousNoteTitle.innerHTML){
-                noteInputEditor.style.backgroundColor = note.bgColor;
-                noteInputEditor.style.color = note.color;
-                noteInputEditor.style.fontSize = note.fontSize;
-                noteInputEditor.style.fontStyle = note.italic;
-                noteInputEditor.style.fontWeight = note.bold;
+                noteBodyEditor.style.backgroundColor = note.bgColor;
+                noteBodyEditor.style.color = note.color;
+                noteBodyEditor.style.fontSize = note.fontSize;
+                noteBodyEditor.style.fontStyle = note.italic;
+                noteBodyEditor.style.fontWeight = note.bold;
                 fontSize[1].value = note.fontSize.slice(0,2);
-                noteInputEditor.style.fontWeight === 'bold' ? boldButton[1].style.backgroundColor = 'green' : boldButton[1].style.backgroundColor = '#ff8000';
-                noteInputEditor.style.fontStyle === 'italic' ? italicButton[1].style.backgroundColor = 'green' : italicButton[1].style.backgroundColor = '#ff8000';
+                noteBodyEditor.style.fontWeight === 'bold' ? boldButton[1].style.backgroundColor = 'green' : boldButton[1].style.backgroundColor = '#ff8000';
+                noteBodyEditor.style.fontStyle === 'italic' ? italicButton[1].style.backgroundColor = 'green' : italicButton[1].style.backgroundColor = '#ff8000';
             }
         });
     }
@@ -231,10 +243,11 @@ function viewPreviousNote(event){
  * validateTitle takes no arguments.
  * There is no return value in all cases.
  * @param {object} event
- * This function is fired when the user clicks on "Submit" button in the note composer.
+ * This function is fired when the user leaves the note title input field blank in the note composer.
  * This function displays a "Title is required field" message.
  */
 function validateTitle(event){
+    //this is applicable for note composer only as user cannot edit title in note editor
     if(event.target.value !== ''){
         titleRequiredField[0].style.display = 'none';
     }
@@ -247,22 +260,26 @@ function validateTitle(event){
  * validateInput takes no arguments.
  * There is no return value in all cases.
  * @param {object} event
- * This function is fired when the user clicks on "Submit" button in the note composer/note editor.
+ * This function is fired when the user leaves the note body input field blank in the note composer/note editor.
  * This function displays a "Note is required field" message.
  */
 function validateInput(event){
     if(event.target.value !== ''){
+        //hide the messagefor note composer
         if(event.target.id === 'note-input-composer'){
             noteRequiredField[0].style.display = 'none';
         }
+        //hide the message for note editor
         else{
             noteRequiredField[1].style.display = 'none';
         }
     }
     else{
+        //display the message for note composer
         if(event.target.id === 'note-input-composer'){
             noteRequiredField[0].style.display = 'block';
         }
+        //display the message for note editor
         else{
             noteRequiredField[1].style.display = 'block';
         }
@@ -286,27 +303,32 @@ function validateNewNote(note){
 /**
  * submitNote takes no arguments.
  * There is no return value in all cases.
- * This function is fired when the user clicks on "Submit" button in the note composer/note editor.
+ * This function is fired when the user clicks on "Submit" button in the note composer.
  * This function validates the note title, saves the note body, title and styles and pushes it to localStorage.
  */
 function submitNote(){
+    //reset isNoteValid to true for proper validaton
     isNoteValid = true;
+    //display required field messages for title and note body in note composer.
     noteTitleComposer.value === '' ? titleRequiredField[0].style.display = 'block' : titleRequiredField[0].style.display = 'none';
-    noteInputComposer.value === '' ? noteRequiredField[0].style.display = 'block' : noteRequiredField[0].style.display = 'none';
+    noteBodyComposer.value === '' ? noteRequiredField[0].style.display = 'block' : noteRequiredField[0].style.display = 'none';
+    //initialize the notes array in localStorage
     if(localStorage.getItem('notes') === null){
         localStorage.setItem('notes', '[]');
     }
     let notes = JSON.parse(localStorage.getItem('notes'));
+    //validate the new note with all of the existing notes so as to confirm the new note is not a duplicate
     notes.forEach(validateNewNote);
-    if(isNoteValid && noteTitleComposer.value !== '' && noteInputComposer.value !== ''){
+    //save the new note if it is valid and not empty
+    if(isNoteValid && noteTitleComposer.value !== '' && noteBodyComposer.value !== ''){
         notes.push({
             noteTitle: noteTitleComposer.value,         
-            noteInput: noteInputComposer.value, 
-            bold: noteInputComposer.style.fontWeight, 
-            italic: noteInputComposer.style.fontStyle, 
-            color: noteInputComposer.style.color, 
-            bgColor: noteInputComposer.style.backgroundColor,
-            fontSize: noteInputComposer.style.fontSize
+            noteBody: noteBodyComposer.value, 
+            bold: noteBodyComposer.style.fontWeight, 
+            italic: noteBodyComposer.style.fontStyle, 
+            color: noteBodyComposer.style.color, 
+            bgColor: noteBodyComposer.style.backgroundColor,
+            fontSize: noteBodyComposer.style.fontSize
         });
         localStorage.setItem('notes',JSON.stringify(notes));
         noteComposer.style.display = 'none';
@@ -323,19 +345,21 @@ function submitNote(){
  * This function applies all the changes to note body ans saves it to localStorage.
  */
 function saveNoteEdits(){
+    //display required field messages for title and note body in note editor.
     noteTitleEditor.value === '' ? titleRequiredField[1].style.display = 'block' : titleRequiredField[1].style.display = 'none';
-    noteInputEditor.value === '' ? noteRequiredField[1].style.display = 'block' : noteRequiredField[1].style.display = 'none';
-    if(noteTitleEditor.value !== '' && noteInputEditor.value !== ''){
+    noteBodyEditor.value === '' ? noteRequiredField[1].style.display = 'block' : noteRequiredField[1].style.display = 'none';
+    //edit the changes if title and body are not empty
+    if(noteTitleEditor.value !== '' && noteBodyEditor.value !== ''){
         let notes = JSON.parse(localStorage.getItem('notes'));
         notes.forEach((note)=>{
             if(note.noteTitle === noteTitleEditor.value){
                 note.noteTitle = noteTitleEditor.value,         
-                note.noteInput = noteInputEditor.value, 
-                note.bold = noteInputEditor.style.fontWeight, 
-                note.italic = noteInputEditor.style.fontStyle, 
-                note.color = noteInputEditor.style.color, 
-                note.bgColor = noteInputEditor.style.backgroundColor,
-                note.fontSize = noteInputEditor.style.fontSize
+                note.noteBody = noteBodyEditor.value, 
+                note.bold = noteBodyEditor.style.fontWeight, 
+                note.italic = noteBodyEditor.style.fontStyle, 
+                note.color = noteBodyEditor.style.color, 
+                note.bgColor = noteBodyEditor.style.backgroundColor,
+                note.fontSize = noteBodyEditor.style.fontSize
             }
         });
         localStorage.setItem('notes',JSON.stringify(notes));
@@ -354,9 +378,11 @@ function saveNoteEdits(){
  * This function deletes a note from localStorage.
  */
 function deletePreviousNote(event){
+    //get the title of note selected for deleting
     let [previousNoteTitle,] = event.target.parentNode.children;
     console.log(previousNoteTitle);
     let notes = JSON.parse(localStorage.getItem('notes'));
+    //search for the note in localStorage and delete it
     notes.forEach((note)=>{
         if(note.noteTitle === previousNoteTitle.innerHTML){
             let index = notes.indexOf(note);
@@ -364,6 +390,7 @@ function deletePreviousNote(event){
             notes.splice(index,1);
         }
     });
+    //update the new array and relaod
     localStorage.setItem('notes',JSON.stringify(notes));
     location.reload();
 }
@@ -375,6 +402,7 @@ function deletePreviousNote(event){
  * This function takes the user back to home page from note editor/note composer.
  */
 function cancelNote(){
+    //brings back the user to home page
     noteComposer.style.display = 'none';
     noteEditor.style.display = 'none';
     yourNotes.style.display = 'block';
