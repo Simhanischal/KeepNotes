@@ -4,6 +4,8 @@ const noteEditor = document.querySelector('.note-editor');
 const createNoteButton = document.querySelector('#create-button');
 const submitNoteButton = document.querySelector('#submit-button');
 const editNoteButton = document.querySelector('#edit-button');
+/* all querySelectorAll statements select two elements: 
+   a note composer element and a note editor element */
 const cancelNoteButton = document.querySelectorAll('.cancel-button');
 const bgColor = document.querySelectorAll('.bg-color');
 const boldButton = document.querySelectorAll('.bold-button');
@@ -25,6 +27,8 @@ window.addEventListener('load',init);
 createNoteButton.addEventListener('click',createNote);
 submitNoteButton.addEventListener('click',submitNote);
 editNoteButton.addEventListener('click',saveNoteEdits);
+/* all the elements below which is part of an array have the structure as: 
+  [0] -> note composer element , [1] -> note editor element */
 cancelNoteButton[0].addEventListener('click',cancelNote);
 cancelNoteButton[1].addEventListener('click',cancelNote);
 bgColor[0].addEventListener('change',changeBgColor);
@@ -42,6 +46,12 @@ noteInputEditor.addEventListener('input',validateInput);
 noteTitleComposer.addEventListener('input',validateTitle);
 
 //change input to notebody
+/**
+ * init takes no arguments.
+ * There is no return value in all cases.
+ * This function is fired when the whole page is loaded.
+ * This function displays all the saved notes with their applied styles.
+ */
 function init(){
     let notes = JSON.parse(localStorage.getItem('notes'));
     notes.reverse();
@@ -84,6 +94,12 @@ function init(){
     }
 }
 
+/**
+ * createNote takes no arguments.
+ * There is no return value in all cases.
+ * This function is fired when the user clicks on "Create Note" button in the home page.
+ * This function opens a note composer window where user can create a note.
+ */
 function createNote(){
     noteTitleComposer.value = '';
     noteInputComposer.value = '';
@@ -96,6 +112,12 @@ function createNote(){
     noteInputComposer.style.fontSize = '15px';
 }
 
+/**
+ * editNote takes no arguments.
+ * There is no return value in all cases.
+ * This function is fired when the user clicks on "View" button in the home page.
+ * This function opens a note editor window where user can edit a note.
+ */
 function editNote(){
     yourNotesHeading.style.display = 'none';
     titleRequiredField[1].style.display = 'none';
@@ -105,10 +127,24 @@ function editNote(){
     createNoteButton.style.display = 'none';
 }
 
+/**
+ * changeBgColor takes "event"(JavaScript event) as argument.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "Change Background(icon)" button in the note editor/note composer.
+ * This function changes the background color of the note body in note composer/note editor.
+ */
 function changeBgColor(event){
     event.target.classList.contains('composer') === true ? noteInputComposer.style.backgroundColor = bgColor[0].value : noteInputEditor.style.backgroundColor = bgColor[1].value;
 }
 
+/**
+ * toggleNoteBold takes "event"(JavaScript event) as argument.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "Bold(icon)" button in the note editor/note composer.
+ * This function toggles the boldness of the note body in note composer/note editor.
+ */
 function toggleNoteBold(event){
     if(event.target.classList.contains('composer')){
         noteInputComposer.style.fontWeight === 'bold' ? noteInputComposer.style.fontWeight = 'normal' : noteInputComposer.style.fontWeight = 'bold';
@@ -120,6 +156,13 @@ function toggleNoteBold(event){
     }
 }
 
+/**
+ * toggleNoteItalic takes "event"(JavaScript event) as argument.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "Italic(icon)" button in the note editor/note composer.
+ * This function toggles the italic style of the note body in note composer/note editor.
+ */
 function toggleNoteItalic(event){
     if(event.target.classList.contains('composer')){
         noteInputComposer.style.fontStyle === 'italic' ? noteInputComposer.style.fontStyle ='normal' : noteInputComposer.style.fontStyle = 'italic';
@@ -131,14 +174,35 @@ function toggleNoteItalic(event){
     }
 }
 
+/**
+ * changeFontSize takes "event"(JavaScript event) as argument.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user changes the value of "Change Font Size" input field in the note editor/note composer.
+ * This function changes the font size of the note body in note composer/note editor.
+ */
 function changeFontSize(event){
     event.target.classList.contains('composer') === true ? noteInputComposer.style.fontSize = `${fontSize[0].value}px` : noteInputEditor.style.fontSize = `${fontSize[1].value}px`;
 }
 
+/**
+ * changeFontColor takes "event"(JavaScript event) as argument.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "Change Font Color(icon)" button in the note editor/note composer.
+ * This function changes the font color of the note body in note composer/note editor.
+ */
 function changeFontColor(event){
     event.target.classList.contains('composer') === true ? noteInputComposer.style.color = fontColor[0].value : noteInputEditor.style.color = fontColor[1].value;
 }
 
+/**
+ * viewPreviousNote takes no arguments.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "View" button in the home page.
+ * This function opens a note editor window where user can edit a note.
+ */
 function viewPreviousNote(event){
     // console.log(event);
     let [previousNoteTitle, previousNoteInput] = event.target.parentNode.children;
@@ -163,16 +227,29 @@ function viewPreviousNote(event){
     }
 }
 
+/**
+ * validateTitle takes no arguments.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "Submit" button in the note composer.
+ * This function displays a "Title is required field" message.
+ */
 function validateTitle(event){
     if(event.target.value !== ''){
         titleRequiredField[0].style.display = 'none';
-
     }
     else{
         titleRequiredField[0].style.display = 'block';
     }
 }
 
+/**
+ * validateInput takes no arguments.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "Submit" button in the note composer/note editor.
+ * This function displays a "Note is required field" message.
+ */
 function validateInput(event){
     if(event.target.value !== ''){
         if(event.target.id === 'note-input-composer'){
@@ -192,6 +269,13 @@ function validateInput(event){
     }
 }
 
+/**
+ * validateNewNote takes "note" as argument.
+ * There is no return value in all cases.
+ * @param {object} note
+ * This function is fired when the user clicks on "Submit" button in the note composer/note editor.
+ * This function validates if a note with the same title is already present in localStorage.
+ */
 function validateNewNote(note){
     if(note.noteTitle === noteTitleComposer.value){
         isNoteValid = false;
@@ -199,6 +283,12 @@ function validateNewNote(note){
     }
 }
 
+/**
+ * submitNote takes no arguments.
+ * There is no return value in all cases.
+ * This function is fired when the user clicks on "Submit" button in the note composer/note editor.
+ * This function validates the note title, saves the note body, title and styles and pushes it to localStorage.
+ */
 function submitNote(){
     isNoteValid = true;
     noteTitleComposer.value === '' ? titleRequiredField[0].style.display = 'block' : titleRequiredField[0].style.display = 'none';
@@ -226,6 +316,12 @@ function submitNote(){
     }
 }
 
+/**
+ * saveNoteEdits takes no arguments.
+ * There is no return value in all cases.
+ * This function is fired when the user clicks on "Edit" button in the note composer/note editor.
+ * This function applies all the changes to note body ans saves it to localStorage.
+ */
 function saveNoteEdits(){
     noteTitleEditor.value === '' ? titleRequiredField[1].style.display = 'block' : titleRequiredField[1].style.display = 'none';
     noteInputEditor.value === '' ? noteRequiredField[1].style.display = 'block' : noteRequiredField[1].style.display = 'none';
@@ -250,6 +346,13 @@ function saveNoteEdits(){
     }
 }
 
+/**
+ * deletePreviousNote takes "event"(JavaScript event) as argument.
+ * There is no return value in all cases.
+ * @param {object} event
+ * This function is fired when the user clicks on "Delete" button in the home page.
+ * This function deletes a note from localStorage.
+ */
 function deletePreviousNote(event){
     let [previousNoteTitle,] = event.target.parentNode.children;
     console.log(previousNoteTitle);
@@ -265,6 +368,12 @@ function deletePreviousNote(event){
     location.reload();
 }
 
+/**
+ * cancelNote takes no arguments.
+ * There is no return value in all cases.
+ * This function is fired when the user clicks on "Cancel" button in note composer/note editor.
+ * This function takes the user back to home page from note editor/note composer.
+ */
 function cancelNote(){
     noteComposer.style.display = 'none';
     noteEditor.style.display = 'none';
